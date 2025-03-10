@@ -1,0 +1,16 @@
+[
+  {
+    "price": 29.99,
+    "imgUrl": "http://example.com/image1.jpg",
+    "title": "Product 1",
+    "count": 10,
+    "dis": "Description of Product 1"
+  },
+  {
+    "price": 49.99,
+    "imgUrl": "http://example.com/image2.jpg",
+    "title": "Product 2",
+    "count": 5,
+    "dis": "Description of Product 2"
+  }
+]

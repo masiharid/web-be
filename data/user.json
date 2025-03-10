@@ -1,0 +1,14 @@
+[
+    {
+      "username": "masihakhanum",
+      "email": "masihakhanum08@gmail.com",
+      "password": "$2b$10$bFQhHeymfWaMyTwGGb9Vh.QehwacL1cLJhkpCEGmuQoGr407ejWBe", 
+      "isActive": "Active"
+    },
+    {
+      "username": "Mike",
+      "email": "Mike@example.com",
+      "password": "$2b$10$S0IsCovvmxri2lMHAwbCs.XPxbIYSfwvimSDZ7yeIWxiflMxjrHI2", 
+      "isActive": "Inactive"
+    }
+  ]
