@@ -1,29 +1,26 @@
-//Require
 const mongoose = require('mongoose');
 
-//Schema
-const Users = new mongoose.Schema({
-    Username :{
+const userSchema = new mongoose.Schema({
+    Username: {
+        type: String,
+        required: true
+    },
+    Email: {
         type: String,
         required: true,
-        collection: String
+        unique: true
     },
-    Email :{
+    Password: {
         type: String,
-        required: true,
-        
+        required: true
     },
-    Password:{
-        type: String,
-        required : true
-    },
-    isActive:{
-        type: String,
-        default :'inActive'
+    isActive: {
+        type: Boolean,
+        default: false // Default to false, meaning the account is inactive by default
     }
+});
 
-},{timestamps : true})
+const Userdata = mongoose.model('Userdata', userSchema);
 
-//Export;
-module.exports = mongoose.model('Users',Users,"User_Data");
+module.exports = Userdata;
 

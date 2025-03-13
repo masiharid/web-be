@@ -17,6 +17,12 @@ Path.get('/', (req, res) => {
 // User registration
 Path.post('/Register', async (req, res) => {
     try {
+        // Check if user with the same email already exists
+        let existingUser = await Userdata.findOne({ Email: req.body.Email });
+        if (existingUser) {
+            return res.status(400).json({ Message: "Email already exists" });
+        }
+
         // Password Hashing;
         let salt = await bcrypt.genSalt(10);
         let hash = await bcrypt.hash(req.body.Password, salt);
@@ -54,19 +60,29 @@ Path.post('/Register', async (req, res) => {
         });
         res.json({ Message: "Account Created, please Activate Account" });
     } catch (error) {
+        if (error.code === 11000) {
+            // Duplicate key error
+            return res.status(400).json({ Message: "Email already exists" });
+        }
         console.log(error);
         res.status(500).json({ Message: "Error creating account" });
     }
 });
 
 // Account Activation;
-Path.put('/Activate/:id', async (req, res) => {
+Path.get('/Activate/:id', async (req, res) => {
     try {
-        let Update = req.body.isActive;
-        await Userdata.findOneAndUpdate({ _id: req.params.id }, { $set: { isActive: Update } }, { new: true });
-        res.status(201).json({ Message: "Account Activated" });
+        let userId = req.params.id;
+        let user = await Userdata.findById(userId);
+        if (!user) {
+            return res.status(404).json({ Message: "User not found" });
+        }
+
+        user.isActive = true;
+        await user.save();
+        res.json({ Message: "Account activated successfully" });
     } catch (error) {
-        console.log("Something Went wrong" + error);
+        console.log(error);
         res.status(500).json({ Message: "Error activating account" });
     }
 });

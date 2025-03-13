@@ -8,7 +8,7 @@ const productadd = require('./Src/Routes/adminRoute');
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'http://localhost:4000',
+  origin: ['http://localhost:3000', 'http://192.168.70.111:3000'], // Allow requests from these origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
   credentials: true
